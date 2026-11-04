@@ -1,0 +1,14 @@
+{
+  "name": "dustin-builds",
+  "owner": {
+    "name": "Dustin Doan"
+  },
+  "description": "Claude Code skills from the Dustin Builds video pipeline",
+  "plugins": [
+    {
+      "name": "video-pipeline",
+      "source": "./plugins/video-pipeline",
+      "description": "Pre-publish check, retention review and voice-synced Remotion skills"
+    }
+  ]
+}

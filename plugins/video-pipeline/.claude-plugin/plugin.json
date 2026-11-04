@@ -1,0 +1,9 @@
+{
+  "name": "video-pipeline",
+  "version": "0.1.0",
+  "description": "Three skills for a Claude Code + Remotion video pipeline: prepublish-check, retention-review, voice-synced-remotion.",
+  "author": {
+    "name": "Dustin Doan"
+  },
+  "license": "MIT"
+}

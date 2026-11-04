@@ -1,0 +1,38 @@
+{
+ "title": "Codex & Claude Code Usage Limits: One File Changed My Quota",
+ "description": "Codex & Claude Code usage limits: does your setup actually matter? I ran the same feature through both tools, a default setup and a configured one, and tracked what each quota did and whether the feature still worked.\n\nI'm NOT ranking Codex vs Claude Code. Their meters aren't comparable. The question is whether YOUR setup matters inside each tool.\n\nTest it yourself: pick one feature, write the checks first, run each setup 2 times, compare, and make sure it still works.\n\nChapters\n0:00 Mid-task. Out of quota.\n0:14 The question and the result\n0:36 What counts as done\n0:48 A fair test\n0:59 Default setups\n1:21 What I changed\n1:45 Configured setups\n2:03 Every run, charted\n2:18 Copy this file\n2:29 Limits of this test\n2:40 Try it yourself\n\nLimits: one task, one repo, {{N}} runs per setup. Quota meters can lag and are different for each tool. This shows what happened here, it isn't a general rule.",
+ "tags": [
+  "ai coding",
+  "ai coding agents",
+  "ai coding tools",
+  "ai development",
+  "ai tools",
+  "claude",
+  "claude ai",
+  "claude ai tutorial",
+  "claude code",
+  "claude code course",
+  "claude code for beginners",
+  "claude code hooks",
+  "claude code limits",
+  "claude code plugins",
+  "claude code routines",
+  "claude code subagents",
+  "claude code tips",
+  "claude code tutorial",
+  "codex + claude code",
+  "codex hit limit",
+  "codex limit",
+  "codex limits",
+  "codex usage limits",
+  "codex vs claude",
+  "codex vs claude code",
+  "mods claude code",
+  "openai codex"
+ ],
+ "topicKeywords": [
+  "claude",
+  "codex",
+  "ai"
+ ]
+}
