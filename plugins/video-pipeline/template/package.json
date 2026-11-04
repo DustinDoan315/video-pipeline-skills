@@ -10,7 +10,8 @@
     "qa": "npm run collect && node scripts/qa-sheets.mjs",
     "chapters": "node scripts/chapters.mjs",
     "music": "sh scripts/music-bed.sh",
-    "render": "npm run collect && remotion render Video out/raw.mp4 && sh scripts/finish-audio.sh out/raw.mp4 out/video.mp4"
+    "render": "npm run collect && remotion render Video out/raw.mp4 && sh scripts/finish-audio.sh out/raw.mp4 out/video.mp4",
+    "short": "node scripts/make-short.mjs"
   },
   "dependencies": {
     "@remotion/cli": "4.0.539",

@@ -25,11 +25,12 @@ Then ask Claude Code to "make a video about ..." and the `make-video` skill walk
 | 7 | `audio-bed` | Original lo-fi music bed and -16 LUFS loudness |
 | 9 | `publish-package` | Title, description, chapters from real timing, tags, pinned comment |
 | 9 | `prepublish-check` | Blocks placeholders, bad tags, broken chapters, missing credits. Also a `PreToolUse` hook on `vidiq_update_video` |
-| 10 | `retention-review` | Steepest audience drops and the script line at each one |
+| 10 | `shorts-from-long` | Cuts 2-3 vertical Shorts from a long video's takes, each pointing back to it |
+| 11 | `retention-review` | Steepest audience drops and the script line at each one |
 
 ## The template
 
-`plugins/video-pipeline/template` is a Remotion project you drive from JSON. Each take in `src/data/script.json` has captions, plus visuals, memes and stickers keyed by caption index. Numbers come from `src/data/video.json` as `"$path"` references.
+`plugins/video-pipeline/template` is a Remotion project you drive from JSON, in 16:9 or 9:16 (`"format": "short"`). Each take in `src/data/script.json` has captions, plus visuals, memes and stickers keyed by caption index. Numbers come from `src/data/video.json` as `"$path"` references.
 
 ```bash
 cp -R plugins/video-pipeline/template my-video && cd my-video && npm install
@@ -37,6 +38,7 @@ npm run music -- 40   # original music bed, 40 s
 npm run qa            # contact sheets in out/qa/
 npm run chapters      # YouTube chapters from the real timing
 npm run render        # out/video.mp4 at -16 LUFS
+npm run short -- ../my-short 01-hook   # vertical 1080x1920 Short from chosen takes
 ```
 
 It needs Node 22+, ffmpeg and python3. Emoji art is Twemoji (CC-BY 4.0). Credit it in your description:

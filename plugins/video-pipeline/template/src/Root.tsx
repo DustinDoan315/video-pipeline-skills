@@ -4,6 +4,7 @@ import {parseMedia} from '@remotion/media-parser';
 import S from './data/script.json';
 import {FPS, computeTakes, type Take} from './timing-core.mjs';
 import {Frame, TakeCtx} from './ui';
+import {H, W} from './layout';
 import {Meme} from './memes';
 import {Visuals} from './visuals';
 import {CUSTOM} from './custom';
@@ -48,8 +49,8 @@ export const RemotionRoot: React.FC = () => (
     id="Video"
     component={Video}
     fps={FPS}
-    width={1920}
-    height={1080}
+    width={W}
+    height={H}
     defaultProps={{voiceSec: null} as Props}
     calculateMetadata={async () => {
       // Voice mode: each take's audio file sets its length. Text mode: reading time does.

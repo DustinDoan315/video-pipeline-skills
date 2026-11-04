@@ -15,7 +15,8 @@ export const MONO = "'SF Mono', Menlo, Consolas, monospace";
 export const SANS = "-apple-system, 'Segoe UI', Inter, Helvetica, Arial, sans-serif";
 
 // Visual area sits above the caption band.
-export const VIS = {top: 120, bottom: 820};
+export {VIS} from './layout';
+import {CAP, IS_SHORT, VIS, stickerXY} from './layout';
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 export const ease = (f: number, a: number, b: number, from = 0, to = 1) =>
@@ -73,8 +74,8 @@ export const Frame: React.FC<{chapter: string; n: number; total: number; sticker
     <AbsoluteFill style={{background: `radial-gradient(ellipse at 50% 30%, #1c2330 0%, ${C.bg} 70%)`, fontFamily: SANS, color: C.text}}>
       {children}
       <div style={{position: 'absolute', left: 48, top: 40, display: 'flex', gap: 14, alignItems: 'center'}}>
-        <div style={{fontWeight: 800, fontSize: 22, color: '#111', background: C.amber, padding: '6px 14px', borderRadius: 8}}>{n}/{total}</div>
-        <div style={{fontWeight: 800, fontSize: 24, color: '#fff', background: 'rgba(0,120,212,.9)', padding: '6px 16px', borderRadius: 8}}>{chapter}</div>
+        {!IS_SHORT && <div style={{fontWeight: 800, fontSize: 22, color: '#111', background: C.amber, padding: '6px 14px', borderRadius: 8}}>{n}/{total}</div>}
+        <div style={{fontWeight: 800, fontSize: IS_SHORT ? 34 : 24, color: '#fff', background: 'rgba(0,120,212,.9)', padding: '6px 16px', borderRadius: 8}}>{chapter}</div>
       </div>
       <ChannelLogo size={60} style={{position: 'absolute', right: 48, top: 32, borderRadius: 14}} />
       {stickers.map((s, i) => <StickerPop key={i} s={s} from={cues[s.at]?.from ?? 0} dur={cues[s.at]?.dur ?? 60} />)}
@@ -88,8 +89,8 @@ const Caption: React.FC<{cue: Cue}> = ({cue}) => {
   const o = Math.min(ease(f, 0, 8), interpolate(f, [cue.dur - 6, cue.dur], [1, 0.25], clamp));
   const y = ease(f, 0, 10, 16, 0);
   return (
-    <div style={{position: 'absolute', left: 0, right: 0, top: 850, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: o, transform: `translateY(${y}px)`}}>
-      <div style={{fontSize: 46, fontWeight: 650, lineHeight: 1.28, color: '#fff', maxWidth: 1640, textAlign: 'center', textWrap: 'balance', textShadow: '0 3px 18px rgba(0,0,0,.8)'}}>
+    <div style={{position: 'absolute', left: CAP.left, right: CAP.right, top: CAP.top, height: CAP.height, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: o, transform: `translateY(${y}px)`}}>
+      <div style={{fontSize: CAP.size, fontWeight: 650, lineHeight: 1.28, color: '#fff', maxWidth: CAP.maxW, textAlign: 'center', textWrap: 'balance', textShadow: '0 3px 18px rgba(0,0,0,.8)'}}>
         {hl(cue.text)}
       </div>
     </div>
@@ -98,7 +99,7 @@ const Caption: React.FC<{cue: Cue}> = ({cue}) => {
 
 // ---------- Basic blocks ----------
 export const Center: React.FC<{children: React.ReactNode; top?: number; bottom?: number; gap?: number; row?: boolean}> = ({children, top = VIS.top, bottom = VIS.bottom, gap = 40, row}) => (
-  <div style={{position: 'absolute', left: 80, right: 80, top, height: bottom - top, display: 'flex', flexDirection: row ? 'row' : 'column', alignItems: 'center', justifyContent: 'center', gap}}>{children}</div>
+  <div style={{position: 'absolute', left: VIS.left, right: VIS.right, top, height: bottom - top, display: 'flex', flexDirection: row && !IS_SHORT ? 'row' : 'column', alignItems: 'center', justifyContent: 'center', gap}}>{children}</div>
 );
 
 export const Card: React.FC<{children: React.ReactNode; w?: number; color?: string; style?: React.CSSProperties}> = ({children, w, color = C.line, style}) => (
@@ -204,13 +205,13 @@ export const Code: React.FC<{text: string; title: string; w?: number; size?: num
 export const Bars: React.FC<{items: {label: string; value: number; color: string}[]; max: number; d?: number}> = ({items, max, d = 0}) => {
   const f = useCurrentFrame();
   return (
-    <div style={{display: 'flex', gap: 120, alignItems: 'flex-end', height: 520}}>
+    <div style={{display: 'flex', gap: IS_SHORT ? 50 : 120, alignItems: 'flex-end', height: IS_SHORT ? 640 : 520}}>
       {items.map((it, i) => {
         const p = ease(f, d + i * 8, d + i * 8 + 40);
         return (
           <div key={it.label} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14}}>
             <div style={{fontSize: 64, fontWeight: 900, color: it.color}}>{Math.round(it.value * p).toLocaleString('en-US')}</div>
-            <div style={{width: 260, height: Math.max(6, (it.value / max) * 380 * p), background: it.color, borderRadius: 12}} />
+            <div style={{width: IS_SHORT ? 200 : 260, height: Math.max(6, (it.value / max) * (IS_SHORT ? 500 : 380) * p), background: it.color, borderRadius: 12}} />
             <div style={{fontSize: 32, fontWeight: 700}}>{it.label}</div>
           </div>
         );
@@ -327,7 +328,7 @@ const StickerInner: React.FC<{s: Sticker; fps: number; len: number}> = ({s, fps,
   const wob = Math.sin(f / 6) * 2;
   return (
     <div style={{
-      position: 'absolute', left: s.x, top: s.y, transform: `scale(${sc * (1 - (1 - out) * 0.4)}) rotate(${s.rot + wob + spin}deg)`, opacity: out,
+      position: 'absolute', left: stickerXY(s.x, s.y).x, top: stickerXY(s.x, s.y).y, transform: `scale(${sc * (1 - (1 - out) * 0.4)}) rotate(${s.rot + wob + spin}deg)`, opacity: out,
       background: STICKER_BG[s.color] ?? C.amber, color: '#111', fontFamily: SANS, fontWeight: 900, fontSize: 40, letterSpacing: 1,
       padding: '12px 26px', borderRadius: 14, border: '5px solid #fff', boxShadow: '0 12px 30px rgba(0,0,0,.55)', whiteSpace: 'nowrap', zIndex: 5,
     }}>{s.text}</div>

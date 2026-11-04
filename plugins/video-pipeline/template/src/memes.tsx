@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {C, Sfx} from './ui';
 import {CHANNEL, ChannelLogo} from './channel';
+import {IS_SHORT, MEME} from './layout';
 
 // Emoji art: Twemoji by Twitter/X, CC-BY 4.0 (credit in the description).
 export const emojiFile = (e: string) =>
@@ -44,7 +45,7 @@ export const Meme: React.FC<{m: MemeSpec}> = ({m}) => {
   const s = spring({frame: f, fps, config: {damping: 12, stiffness: 170}});
   return (
     <AbsoluteFill style={{background: '#0e0e10'}}>
-      <div style={{position: 'absolute', left: 150, right: 150, top: 105, height: 715, borderRadius: 26, background: '#1b1b20', border: '6px solid #fff',
+      <div style={{position: 'absolute', left: MEME.left, right: MEME.right, top: MEME.top, height: MEME.height, borderRadius: 26, background: '#1b1b20', border: '6px solid #fff',
         overflow: 'hidden', transform: `scale(${0.85 + 0.15 * s}) rotate(${(1 - s) * -3}deg)`, opacity: Math.min(1, s * 1.6), boxShadow: '0 30px 90px rgba(0,0,0,.6)'}}>
         <MemeBody m={m} f={f} />
       </div>
@@ -70,8 +71,8 @@ const MemeBody: React.FC<{m: MemeSpec; f: number}> = ({m, f}) => {
       );
     case 'nobody':
       return (
-        <Row style={{height: '100%', padding: '0 80px', gap: 60}}>
-          <div style={{flex: 1, fontFamily: "-apple-system, Helvetica, Arial", fontSize: 58, lineHeight: 1.5, color: '#fff'}}>
+        <Row style={{height: '100%', padding: IS_SHORT ? '0 50px' : '0 80px', gap: 60, flexDirection: IS_SHORT ? 'column' : 'row', justifyContent: 'center'}}>
+          <div style={{flex: IS_SHORT ? undefined : 1, fontFamily: "-apple-system, Helvetica, Arial", fontSize: 58, lineHeight: 1.5, color: '#fff'}}>
             <div><b>Nobody:</b></div>
             <div style={{opacity: fx(14)}}><b>{m.who}:</b> <span style={{color: C.amber}}>{m.says}</span></div>
           </div>
@@ -159,30 +160,37 @@ const SubscribeCTA: React.FC<{top: string; bottom?: string; f: number}> = ({top,
   const click = 45;
   const done = f >= click;
   const p = interpolate(f, [8, click - 4], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const ease = 1 - Math.pow(1 - p, 3);
-  const cx = 1450 - ease * 475;
-  const cy = 650 - ease * 300;
+  const glide = 1 - Math.pow(1 - p, 3);
   const press = f >= click - 4 && f < click + 4 ? 0.92 : 1;
   const ring = done ? Math.sin((f - click) / 2) * 22 * Math.max(0, 1 - (f - click) / 40) : 0;
+  const font = "-apple-system, Helvetica, Arial";
   return (
-    <div style={{height: '100%', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 40}}>
-      <MemeText size={68}>{top}</MemeText>
-      <div style={{display: 'flex', alignItems: 'center', gap: 34}}>
-        <ChannelLogo size={120} style={{borderRadius: 60, border: '4px solid #fff'}} />
-        <div style={{fontFamily: "-apple-system, Helvetica, Arial", color: '#fff'}}>
-          <div style={{fontSize: 46, fontWeight: 900}}>{CHANNEL.name}</div>
-          <div style={{fontSize: 26, color: '#aaa'}}>{CHANNEL.tagline ?? ''}</div>
+    <div style={{height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: IS_SHORT ? 60 : 40, padding: '0 30px'}}>
+      <MemeText size={IS_SHORT ? 76 : 68}>{top}</MemeText>
+      <div style={{display: 'flex', flexDirection: IS_SHORT ? 'column' : 'row', alignItems: 'center', gap: 34}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: 28}}>
+          <ChannelLogo size={120} style={{borderRadius: 60, border: '4px solid #fff'}} />
+          <div style={{fontFamily: font, color: '#fff'}}>
+            <div style={{fontSize: 46, fontWeight: 900}}>{CHANNEL.name}</div>
+            <div style={{fontSize: 26, color: '#aaa'}}>{CHANNEL.tagline ?? ''}</div>
+          </div>
         </div>
-        <div style={{transform: `scale(${press})`, background: done ? '#3a3a3f' : '#ff0033', color: '#fff', fontFamily: "-apple-system, Helvetica, Arial", fontWeight: 900, fontSize: 40,
-          padding: '20px 44px', borderRadius: 60, transition: 'none'}}>{done ? 'Subscribed ✓' : 'Subscribe'}</div>
-        <div style={{transform: `rotate(${ring}deg)`, transformOrigin: '50% 10%', opacity: done ? 1 : 0.35}}><Emo e="🔔" size={90} /></div>
+        <div style={{display: 'flex', alignItems: 'center', gap: 30}}>
+          <div style={{position: 'relative'}}>
+            <div style={{transform: `scale(${press})`, background: done ? '#3a3a3f' : '#ff0033', color: '#fff', fontFamily: font, fontWeight: 900,
+              fontSize: IS_SHORT ? 52 : 40, padding: IS_SHORT ? '26px 60px' : '20px 44px', borderRadius: 60}}>{done ? 'Subscribed ✓' : 'Subscribe'}</div>
+            {f < click + 30 && (
+              // the cursor glides in from the lower right and lands on the button
+              <svg width={70} height={70} viewBox="0 0 24 24" style={{position: 'absolute', left: `calc(55% + ${(1 - glide) * 420}px)`, top: `calc(45% + ${(1 - glide) * 280}px)`,
+                filter: 'drop-shadow(0 4px 6px rgba(0,0,0,.6))'}}>
+                <path d="M4 2l14 9-6 1.5L15 20l-3 1.5-3-7.5L4 18z" fill="#fff" stroke="#000" strokeWidth="1.3" strokeLinejoin="round" />
+              </svg>
+            )}
+          </div>
+          <div style={{transform: `rotate(${ring}deg)`, transformOrigin: '50% 10%', opacity: done ? 1 : 0.35}}><Emo e="🔔" size={90} /></div>
+        </div>
       </div>
-      <div style={{opacity: done ? 1 : 0}}><MemeText size={50} color={C.amber}>{bottom ?? ''}</MemeText></div>
-      {f < click + 30 && (
-        <svg width={70} height={70} viewBox="0 0 24 24" style={{position: 'absolute', left: cx, top: cy, filter: 'drop-shadow(0 4px 6px rgba(0,0,0,.6))'}}>
-          <path d="M4 2l14 9-6 1.5L15 20l-3 1.5-3-7.5L4 18z" fill="#fff" stroke="#000" strokeWidth="1.3" strokeLinejoin="round" />
-        </svg>
-      )}
+      <div style={{opacity: done ? 1 : 0}}><MemeText size={IS_SHORT ? 58 : 50} color={C.amber}>{bottom ?? ''}</MemeText></div>
       <Sfx name="tick" at={click} v={0.6} />
       <Sfx name="ding" at={click + 4} v={0.45} />
     </div>

@@ -22,6 +22,7 @@ description: Use when a video is rendered and needs a title, description, chapte
 - **Pinned comment**: one question that invites a reply, plus the main link.
 
 3. Load `prepublish-check` and run it on `publish.json`. Fix every failure and run again until it passes.
-4. Thumbnail: at most 3 words, one big number or face, readable at phone size.
+4. Shorts: no chapters, title under 50 characters, and remind the user to set the Related video in Studio (see `shorts-from-long`).
+5. Thumbnail: at most 3 words, one big number or face, readable at phone size.
 
 The user uploads the video as private in YouTube Studio. Set metadata only after they say so.

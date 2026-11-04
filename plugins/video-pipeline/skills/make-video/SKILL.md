@@ -1,6 +1,6 @@
 ---
 name: make-video
-description: Use when the user wants to make a YouTube video (long-form or a Short) with Claude Code and Remotion, from idea to upload-ready file. Runs the whole pipeline in order and says which skill handles each step.
+description: Use when the user wants to make a YouTube video with Claude Code and Remotion, long-form or a vertical Short, from idea to upload-ready file. Runs the whole pipeline in order and says which skill handles each step.
 ---
 
 Work through these steps in order. Each step names the skill to load. Do not skip a step; say so if the user asks you to.
@@ -14,7 +14,8 @@ Work through these steps in order. Each step names the skill to load. Do not ski
 7. **Audio.** Load `audio-bed`. Music bed, then loudness to -16 LUFS.
 8. **Render.** `npm run render` in the project. Spot-check 3-4 frames from the final mp4.
 9. **Publish package.** Load `publish-package`, then `prepublish-check`. Never hand over metadata that fails the check.
-10. **After 48 hours.** Load `retention-review`. Add one line per failure to `lessons.md`.
+10. **Shorts.** Load `shorts-from-long`. Cut 2-3 Shorts from the finished project; each one's Related video is this video.
+11. **After 48 hours.** Load `retention-review`. Add one line per failure to `lessons.md`.
 
 Rules for the whole run:
 - Every number on screen comes from `src/data/video.json`. Never type a figure into a scene.

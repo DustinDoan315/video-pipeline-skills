@@ -1,7 +1,7 @@
 {
   "name": "video-pipeline",
-  "version": "0.2.0",
-  "description": "The full Claude Code + Remotion video pipeline: brief, viewer-first script, data-driven Remotion template, timing, scene QA, music, publish package, pre-publish guard and retention review.",
+  "version": "0.3.0",
+  "description": "The full Claude Code + Remotion video pipeline: brief, viewer-first script, data-driven Remotion template, timing, scene QA, music, publish package, Shorts cut from long videos, pre-publish guard and retention review.",
   "author": {
     "name": "Dustin Doan"
   },

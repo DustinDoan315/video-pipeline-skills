@@ -25,7 +25,7 @@ Set `"channel": {"name", "tagline", "logo"}` in `src/data/script.json` (logo is 
 3. `npm run qa -- <take id>` and look at the sheet (load `scene-qa`).
 4. Fix, repeat. Only then move to the next take.
 
-Restyle everything by editing `C` (colors) in `src/ui.tsx`. Keep the 1920x1080 layout: visuals live in y 120-820, captions at y 850+.
+Restyle everything by editing `C` (colors) in `src/ui.tsx`. Layout lives in `src/layout.ts`: `"format": "short"` in script.json switches to 1080x1920 with captions and memes kept out of the Shorts button area. To cut Shorts from a finished long video, load `shorts-from-long`.
 
 **Troubleshooting**
 - `Target closed` / `icudtl.dat not found` on macOS: Chrome can't run from inside `~/Documents`. Copy `node_modules/.remotion/chrome-headless-shell/mac-arm64/chrome-headless-shell-mac-arm64` to `~/.cache/remotion-chrome/` and set `REMOTION_CHROME` to the `chrome-headless-shell` binary inside it.
