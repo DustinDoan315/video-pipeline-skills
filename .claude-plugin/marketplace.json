@@ -8,7 +8,7 @@
     {
       "name": "video-pipeline",
       "source": "./plugins/video-pipeline",
-      "description": "Pre-publish check, retention review and voice-synced Remotion skills"
+      "description": "Make YouTube videos with Claude Code and Remotion: brief to upload-ready file, plus a pre-publish guard"
     }
   ]
 }

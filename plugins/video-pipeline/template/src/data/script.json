@@ -1,0 +1,148 @@
+{
+  "channel": {
+    "name": "Your Channel",
+    "tagline": "what your channel is about"
+  },
+  "timing": "text",
+  "music": "music/bed.mp3",
+  "musicVolume": 0.35,
+  "takes": [
+    {
+      "id": "01-hook",
+      "chapter": "What you'll get",
+      "captions": [
+        "By the end, you can turn a data file into a video scene.",
+        "No timeline. No dragging clips at 2 AM.",
+        "Three steps: brief, scene, check."
+      ],
+      "visuals": {
+        "0": {
+          "kind": "title",
+          "text": "Data file → video",
+          "sub": "in three steps"
+        },
+        "2": {
+          "kind": "steps",
+          "items": [
+            "Brief",
+            "Scene",
+            "Check"
+          ]
+        }
+      },
+      "memes": {
+        "1": {
+          "kind": "expect",
+          "left": {
+            "label": "Before",
+            "e": "😵‍💫",
+            "text": "timeline at 2 AM"
+          },
+          "right": {
+            "label": "Now",
+            "e": "😎",
+            "text": "typing at Claude"
+          }
+        }
+      },
+      "stickers": [
+        {
+          "at": 0,
+          "text": "NO TIMELINE",
+          "x": 1300,
+          "y": 170,
+          "color": "mint",
+          "rot": 6
+        }
+      ]
+    },
+    {
+      "id": "02-brief",
+      "chapter": "Step 1: The brief",
+      "captions": [
+        "Step 1: give Claude Code a brief with 4 parts.",
+        "The never list matters most: never invent a number.",
+        "Every number comes from one data file. Like these two."
+      ],
+      "visuals": {
+        "0": {
+          "kind": "code",
+          "title": "brief.md",
+          "file": "brief.md",
+          "hl": [
+            [
+              3,
+              3
+            ]
+          ]
+        },
+        "2": {
+          "kind": "bars",
+          "items": [
+            {
+              "label": "Shorts",
+              "value": "$example.views"
+            },
+            {
+              "label": "Long-form",
+              "value": "$example.otherViews"
+            }
+          ],
+          "source": "Values from src/data/video.json"
+        }
+      },
+      "memes": {
+        "1": {
+          "kind": "nobody",
+          "who": "AI model",
+          "says": "\"I'll just make up a number\"",
+          "e": "🤥"
+        }
+      }
+    },
+    {
+      "id": "03-check",
+      "chapter": "Step 2: Check it",
+      "captions": [
+        "Step 2: check before you publish. Here's a real failure.",
+        "Every video loses people early. Find where it falls fastest.",
+        "Saved you some time? Subscribe."
+      ],
+      "visuals": {
+        "0": {
+          "kind": "terminal",
+          "title": "prepublish-check",
+          "file": "check.txt"
+        },
+        "1": {
+          "kind": "curve",
+          "points": "$retention.points",
+          "durationSec": "$retention.durationSec",
+          "marks": [
+            {
+              "x": 0.09,
+              "label": "50% · 0:26"
+            }
+          ]
+        }
+      },
+      "memes": {
+        "2": {
+          "kind": "subscribe",
+          "top": "saved you time?",
+          "bottom": "thanks, real one"
+        }
+      },
+      "stickers": [
+        {
+          "at": 0,
+          "text": "BLOCKED",
+          "x": 1400,
+          "y": 620,
+          "color": "red",
+          "rot": -6
+        }
+      ]
+    }
+  ]
+}

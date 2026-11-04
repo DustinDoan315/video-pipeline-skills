@@ -1,10 +1,6 @@
 # video-pipeline-skills
 
-Three Claude Code skills from a Claude Code + Remotion video pipeline, built from 20 videos that failed.
-
-- **prepublish-check**: blocks leftover template variables (`{{N}}`), placeholder text and off-topic tags before a title, description or tags go live. Ships with a `PreToolUse` hook on `vidiq_update_video`, so the check runs even if Claude forgets.
-- **retention-review**: takes a retention curve and a timestamped script, and prints the steepest drops with the line playing at each one. It gives places to look, not causes.
-- **voice-synced-remotion**: the `calculateMetadata` pattern that lets each voice take set its scene's length.
+A Claude Code plugin for making YouTube videos with Claude Code and Remotion, from brief to upload-ready file. Built from 20 videos that failed, so yours don't have to.
 
 ## Install
 
@@ -13,15 +9,49 @@ Three Claude Code skills from a Claude Code + Remotion video pipeline, built fro
 /plugin install video-pipeline@dustin-builds
 ```
 
-## Use
+Then ask Claude Code to "make a video about ..." and the `make-video` skill walks through every step.
 
+## Skills
+
+| Step | Skill | What it does |
+|---|---|---|
+| All | `make-video` | Runs the steps below in order |
+| 1 | `video-brief` | 4-part brief and the data file every number comes from |
+| 2 | `viewer-first-script` | Tutorial structure, jokes, meme and sticker slots, subscribe only after value |
+| 3 | `assets-and-rights` | Real data, clips and screenshots; what not to use; credit tracking |
+| 4 | `remotion-scene-kit` | Copies the template and builds one take at a time |
+| 5 | `voice-synced-remotion` | Timing from voice files, or from caption reading time |
+| 6 | `scene-qa` | Contact sheets of every caption's still before the full render |
+| 7 | `audio-bed` | Original lo-fi music bed and -16 LUFS loudness |
+| 9 | `publish-package` | Title, description, chapters from real timing, tags, pinned comment |
+| 9 | `prepublish-check` | Blocks placeholders, bad tags, broken chapters, missing credits. Also a `PreToolUse` hook on `vidiq_update_video` |
+| 10 | `retention-review` | Steepest audience drops and the script line at each one |
+
+## The template
+
+`plugins/video-pipeline/template` is a Remotion project you drive from JSON. Each take in `src/data/script.json` has captions, plus visuals, memes and stickers keyed by caption index. Numbers come from `src/data/video.json` as `"$path"` references.
+
+```bash
+cp -R plugins/video-pipeline/template my-video && cd my-video && npm install
+npm run music -- 40   # original music bed, 40 s
+npm run qa            # contact sheets in out/qa/
+npm run chapters      # YouTube chapters from the real timing
+npm run render        # out/video.mp4 at -16 LUFS
 ```
-node plugins/video-pipeline/skills/prepublish-check/scripts/prepublish-check.mjs examples/publish.json
+
+It needs Node 22+, ffmpeg and python3. Emoji art is Twemoji (CC-BY 4.0). Credit it in your description:
+`Emoji art: Twemoji by Twitter/X, CC-BY 4.0 (https://github.com/jdecked/twemoji)`.
+
+## Tests
+
+```bash
+cd plugins/video-pipeline/skills/prepublish-check/scripts && node --test
+cd plugins/video-pipeline/skills/retention-review/scripts && node --test
 ```
 
 `examples/old-usage-limits.json` is a real published description that fails the check.
-Run the check's tests with `node --test` from `plugins/video-pipeline/skills/prepublish-check/scripts/`.
 
-The hook only guards metadata set through vidIQ. If you publish another way, run the check yourself first. It needs Node.
+## Limits
 
-The brief template is in `plugins/video-pipeline/templates/video-brief.md`.
+- The hook only guards metadata set through vidIQ. If you publish another way, run the check yourself.
+- In voice mode, captions are spread across each take's audio in proportion to their length. They are not synced word by word.

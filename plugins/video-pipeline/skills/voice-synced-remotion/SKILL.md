@@ -1,13 +1,21 @@
 ---
 name: voice-synced-remotion
-description: Use when building a Remotion video with voiceover. Makes the audio set each scene's length, so re-recording one take re-times the whole video.
+description: Use when setting how long each scene of a Remotion video lasts. Lets the voice recording, or the caption text when there is no voice, decide the timing, so re-recording or rewording one take re-times the whole video.
 ---
 
-Record one audio file per take into `public/vo/<scene>.wav`. Never set scene lengths by hand.
+Never set scene lengths by hand. The template (`remotion-scene-kit`) does this in `src/timing-core.mjs`, shared by the render, the QA stills and the chapter list, so they always agree.
 
-Install `@remotion/media-parser` at the same version as the other Remotion packages.
+**Text mode** (no voice), `"timing": "text"` in `script.json`
+- Each caption lasts its reading time: words / 3 + 0.8 s, never under 2.5 s.
+- Reword a caption and its take re-times.
 
-In `src/Root.tsx`, read every take's length in `calculateMetadata`, add a 0.4 s tail, and pass the frames as props:
+**Voice mode**, `"timing": "voice"`
+- Record one file per take: `public/vo/<take id>.wav`. Quiet room, mic 15-20 cm away, 1 s of silence at each end.
+- `calculateMetadata` in `src/Root.tsx` reads each file's length with `@remotion/media-parser` (keep its version equal to the other Remotion packages). The take lasts that long plus a short tail, and captions share the time in proportion to their length.
+- Re-record one take and only that take changes length; everything after it moves.
+- Captions are spread proportionally, not word-synced. If they drift visibly, split the take into shorter takes.
+
+Not using the template? The core is:
 
 ```tsx
 calculateMetadata={async () => {
@@ -19,7 +27,3 @@ calculateMetadata={async () => {
   return {durationInFrames: sceneFrames.reduce((a, b) => a + b, 0), props: {sceneFrames}};
 }}
 ```
-
-The composition renders a `<Series>` with one `<Series.Sequence durationInFrames={sceneFrames[i]}>` per scene, holding that scene's visuals plus an `<Audio>` for its take.
-
-Build one scene at a time. After each, render a still at its midpoint (`npx remotion still <id> --frame=<mid>`) and check that text fits and nothing overlaps.

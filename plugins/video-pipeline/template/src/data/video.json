@@ -1,0 +1,4 @@
+{
+  "example": { "views": 3842, "otherViews": 261, "avgViewSec": 9 },
+  "retention": { "durationSec": 290, "points": [[0,1],[0.03,0.92],[0.09,0.5],[0.2,0.38],[0.5,0.13],[1,0.04]] }
+}

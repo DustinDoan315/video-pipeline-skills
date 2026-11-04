@@ -1,0 +1,4 @@
+$ node scripts/prepublish-check.mjs publish.json
+FAIL pre-publish check
+  - description: placeholder "{{N}}"
+exit 2

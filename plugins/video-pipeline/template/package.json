@@ -1,0 +1,27 @@
+{
+  "name": "my-video",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run collect && remotion studio",
+    "collect": "node scripts/collect.mjs",
+    "lint": "npm run collect && tsc --noEmit",
+    "qa": "npm run collect && node scripts/qa-sheets.mjs",
+    "chapters": "node scripts/chapters.mjs",
+    "music": "sh scripts/music-bed.sh",
+    "render": "npm run collect && remotion render Video out/raw.mp4 && sh scripts/finish-audio.sh out/raw.mp4 out/video.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.539",
+    "@remotion/media-parser": "4.0.539",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.539"
+  },
+  "devDependencies": {
+    "@twemoji/svg": "15.0.0",
+    "@types/react": "19.2.7",
+    "typescript": "5.9.3"
+  }
+}

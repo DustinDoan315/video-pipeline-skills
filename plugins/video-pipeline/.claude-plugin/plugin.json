@@ -1,7 +1,7 @@
 {
   "name": "video-pipeline",
-  "version": "0.1.0",
-  "description": "Three skills for a Claude Code + Remotion video pipeline: prepublish-check, retention-review, voice-synced-remotion.",
+  "version": "0.2.0",
+  "description": "The full Claude Code + Remotion video pipeline: brief, viewer-first script, data-driven Remotion template, timing, scene QA, music, publish package, pre-publish guard and retention review.",
   "author": {
     "name": "Dustin Doan"
   },

@@ -1,0 +1,11 @@
+import type {MemeSpec} from './memes';
+import type {VisualSpec} from './visuals';
+export const FPS: number;
+export function readSec(text: string): number;
+export type Cue = {from: number; dur: number; text: string};
+export type Sticker = {at: number; text: string; x: number; y: number; color: string; rot: number};
+export type Take = {id: string; chapter: string; frames: number; cues: Cue[]; stickers: Sticker[];
+  memes: Record<string, MemeSpec>; visuals: Record<string, VisualSpec>};
+export function computeTakes(script: unknown, voiceSec?: Record<string, number> | null): Take[];
+export function chapterLines(takes: Take[]): string[];
+export function resolve(data: unknown, v: unknown): any;

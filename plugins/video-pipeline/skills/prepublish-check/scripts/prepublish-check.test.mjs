@@ -23,6 +23,19 @@ test("file mode", () => {
   assert.equal(fileRun({ ...good, tags: ["play movies"] }), 2);
   assert.equal(fileRun({ title: "t" }), 2);
   assert.equal(spawnSync("node", [script, "missing.json"], { cwd: dir }).status, 2);
+  assert.equal(fileRun({ ...good, title: "Claude Code #shorts" }), 2);
+});
+
+test("chapters and required lines", () => {
+  const ch = (lines) => ({ ...good, description: `Intro.\n\n${lines}` });
+  assert.equal(fileRun(ch("0:00 Start\n0:40 Middle\n2:10 End")), 0);
+  assert.equal(fileRun(ch("0:05 Start\n0:40 Middle\n2:10 End")), 2);
+  assert.equal(fileRun(ch("0:00 Start\n0:40 Middle")), 2);
+  assert.equal(fileRun(ch("0:00 Start\n0:05 Middle\n2:10 End")), 2);
+  assert.equal(fileRun(ch("0:00 Start\n1:02:00 Late\n1:05:00 End")), 0);
+  const credit = "Twemoji by Twitter/X, CC-BY 4.0";
+  assert.equal(fileRun({ ...good, requiredLines: [credit] }), 2);
+  assert.equal(fileRun({ ...good, description: `Fine. ${credit}`, requiredLines: [credit] }), 0);
 });
 
 test("hook mode checks the tool call", () => {
