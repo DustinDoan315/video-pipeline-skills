@@ -1,10 +1,11 @@
 // Prints YouTube chapter lines from the real timing and writes out/chapters.txt.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { chapterLines, computeTakes, FPS } from "../src/timing-core.mjs";
 import { voiceSeconds } from "./voice.mjs";
 
-const root = join(import.meta.dirname, "..");
+const root = fileURLToPath(new URL("..", import.meta.url));
 const S = JSON.parse(readFileSync(join(root, "src/data/script.json"), "utf8"));
 const takes = computeTakes(S, voiceSeconds(S, root));
 const lines = chapterLines(takes);

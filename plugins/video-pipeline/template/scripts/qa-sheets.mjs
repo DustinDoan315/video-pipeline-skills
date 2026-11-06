@@ -3,10 +3,11 @@
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { computeTakes } from "../src/timing-core.mjs";
 import { voiceSeconds } from "./voice.mjs";
 
-const root = join(import.meta.dirname, "..");
+const root = fileURLToPath(new URL("..", import.meta.url));
 const S = JSON.parse(readFileSync(join(root, "src/data/script.json"), "utf8"));
 const only = process.argv[2];
 const dir = join(root, "out/qa");

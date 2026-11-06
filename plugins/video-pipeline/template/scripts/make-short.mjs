@@ -3,9 +3,10 @@
 // Example: npm run short -- ../short-hook 01-hook 08-prepublish
 import { cpSync, existsSync, readFileSync, symlinkSync, writeFileSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { computeTakes, FPS } from "../src/timing-core.mjs";
 
-const root = join(import.meta.dirname, "..");
+const root = fileURLToPath(new URL("..", import.meta.url));
 const [outArg, ...ids] = process.argv.slice(2);
 if (!outArg || !ids.length) {
   console.error("usage: npm run short -- <new-folder> <take id> [take id ...]");

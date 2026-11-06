@@ -2,9 +2,10 @@
 // Run before every render: npm run collect. Exits 1 with a list of problems.
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, copyFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { resolve } from "../src/timing-core.mjs";
 
-const here = join(import.meta.dirname, "..");
+const here = fileURLToPath(new URL("..", import.meta.url));
 const S = JSON.parse(readFileSync(join(here, "src/data/script.json"), "utf8"));
 const DATA = JSON.parse(readFileSync(join(here, "src/data/video.json"), "utf8"));
 const errors = [];
