@@ -9,7 +9,8 @@ export const readSec = (text) => Math.max(2.5, text.split(/\s+/).length / 3 + 0.
 /**
  * Text mode (voiceSec null): each caption's reading time sets its length.
  * Voice mode: each take lasts as long as its public/vo/<id>.wav; captions share that time in proportion to their length.
- * shortcut: voice-mode captions are proportional, not word-synced. Upgrade with word timestamps if drift shows.
+ * Voice mode with "cueAt": [s, ...] on a take: each caption starts at that second of the take's wav.
+ * shortcut: without cueAt, voice-mode captions are proportional, not word-synced. Add cueAt if drift shows.
  */
 export function computeTakes(script, voiceSec = null) {
   return script.takes.map((t) => {
@@ -18,6 +19,13 @@ export function computeTakes(script, voiceSec = null) {
     const scale = voiceSec && sum ? Math.max(0.05, ((voiceSec[t.id] ?? 0) - LEAD) / sum) : 1;
     let at = Math.round(LEAD * FPS);
     const cues = t.captions.map((text, i) => {
+      if (voiceSec && t.cueAt) {
+        // Exact caption starts (s, from the take's own wav), e.g. read off silencedetect pauses.
+        const from = Math.round(t.cueAt[i] * FPS);
+        const end = Math.round((t.cueAt[i + 1] ?? voiceSec[t.id] ?? 0) * FPS);
+        at = Math.max(end, from + 15);
+        return {from, dur: at - from, text};
+      }
       const dur = Math.max(15, Math.round(base[i] * scale * FPS));
       const c = {from: at, dur, text};
       at += dur;

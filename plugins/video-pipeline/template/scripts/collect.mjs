@@ -38,6 +38,8 @@ S.takes.forEach((t) => {
     if (!MEMES.includes(m.kind)) errors.push(`${t.id}: unknown meme kind "${m.kind}"`);
   }
   for (const s of t.stickers ?? []) if (s.at >= n) errors.push(`${t.id}: sticker "${s.text}" at caption ${s.at}, but only ${n} captions`);
+  if (t.cueAt && (t.cueAt.length !== n || t.cueAt.some((x, i) => typeof x !== "number" || (i && x <= t.cueAt[i - 1]))))
+    errors.push(`${t.id}: cueAt needs ${n} increasing numbers, one per caption`);
   if (S.timing === "voice" && !existsSync(join(here, `public/vo/${t.id}.wav`))) errors.push(`${t.id}: voice mode needs public/vo/${t.id}.wav`);
 });
 if (S.channel?.logo && !existsSync(join(here, "public", S.channel.logo))) errors.push(`channel logo public/${S.channel.logo} missing`);

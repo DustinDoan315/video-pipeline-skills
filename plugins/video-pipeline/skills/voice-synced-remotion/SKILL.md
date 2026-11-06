@@ -13,7 +13,9 @@ Never set scene lengths by hand. The template (`remotion-scene-kit`) does this i
 - Record one file per take: `public/vo/<take id>.wav`. Quiet room, mic 15-20 cm away, 1 s of silence at each end.
 - `calculateMetadata` in `src/Root.tsx` reads each file's length with `@remotion/media-parser` (keep its version equal to the other Remotion packages). The take lasts that long plus a short tail, and captions share the time in proportion to their length.
 - Re-record one take and only that take changes length; everything after it moves.
-- Captions are spread proportionally, not word-synced. If they drift visibly, split the take into shorter takes.
+- Captions are spread proportionally, not word-synced. If they drift visibly, add `"cueAt": [0, 5.2, 8.3]` to the take: one start time in seconds per caption, measured in that take's wav.
+- To find the start times, list the pauses: `ffmpeg -i public/vo/<id>.wav -af silencedetect=noise=-35dB:d=0.25 -f null - 2>&1 | grep silence_end`. Start each caption about 0.15 s before the speech after a pause.
+- One long voice file? Cut it into takes at the longest pauses (`ffmpeg -i full.mp3 -ss <a> -to <b> public/vo/<id>.wav`) before setting cueAt.
 
 Not using the template? The core is:
 
