@@ -2,7 +2,7 @@ import type {MemeSpec} from './memes';
 import type {VisualSpec} from './visuals';
 export const FPS: number;
 export function readSec(text: string): number;
-export type Cue = {from: number; dur: number; text: string};
+export type Cue = {from: number; dur: number; text: string; words?: number[]};
 export type Sticker = {at: number; text: string; x: number; y: number; color: string; rot: number};
 export type Take = {id: string; chapter: string; frames: number; cues: Cue[]; stickers: Sticker[];
   memes: Record<string, MemeSpec>; visuals: Record<string, VisualSpec>};

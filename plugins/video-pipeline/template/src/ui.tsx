@@ -63,7 +63,7 @@ const BeatOffset = React.createContext(0);
 // ---------- Frame: background, chapter chip, logo, caption band ----------
 const hl = (t: string) =>
   t.split(/(\d[\d,]*(?:\.\d+)?\s?%?|"[^"]*")/g).map((p, i) =>
-    /^\d/.test(p) ? <span key={i} style={{color: C.amber}}>{p}</span> : /^"/.test(p) ? <span key={i} style={{color: C.mint}}>{p}</span> : p,
+    /^\d/.test(p) ? <span key={i} style={{color: '#b45309'}}>{p}</span> : /^"/.test(p) ? <span key={i} style={{color: '#047857'}}>{p}</span> : p,
   );
 
 export const Frame: React.FC<{chapter: string; n: number; total: number; stickers?: Sticker[]; children: React.ReactNode}> = ({chapter, n, total, stickers = [], children}) => {
@@ -86,12 +86,24 @@ export const Frame: React.FC<{chapter: string; n: number; total: number; sticker
 
 const Caption: React.FC<{cue: Cue}> = ({cue}) => {
   const f = useCurrentFrame() - cue.from;
-  const o = Math.min(ease(f, 0, 8), interpolate(f, [cue.dur - 6, cue.dur], [1, 0.25], clamp));
-  const y = ease(f, 0, 10, 16, 0);
+  const o = Math.min(ease(f, 0, 6), interpolate(f, [cue.dur - 5, cue.dur], [1, 0.4], clamp));
+  const y = ease(f, 0, 8, 14, 0);
+  // Word-synced (voice mode + wordAt): highlight the word being spoken; otherwise color numbers and quotes.
+  const now = cue.words ? cue.words.reduce((a, w, i) => (f >= w ? i : a), -1) : -1;
+  const body = cue.words
+    ? cue.text.split(/\s+/).map((w, i) => (
+        <React.Fragment key={i}>
+          {i > 0 && ' '}
+          <span style={{borderRadius: 10, padding: '0 6px', margin: '0 -6px', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone',
+            background: i === now ? C.amber : 'transparent', color: i === now ? '#111' : i < now ? '#111' : 'rgba(17,17,17,.55)'}}>{w}</span>
+        </React.Fragment>
+      ))
+    : hl(cue.text);
   return (
     <div style={{position: 'absolute', left: CAP.left, right: CAP.right, top: CAP.top, height: CAP.height, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: o, transform: `translateY(${y}px)`}}>
-      <div style={{fontSize: CAP.size, fontWeight: 650, lineHeight: 1.28, color: '#fff', maxWidth: CAP.maxW, textAlign: 'center', textWrap: 'balance', textShadow: '0 3px 18px rgba(0,0,0,.8)'}}>
-        {hl(cue.text)}
+      <div style={{fontSize: CAP.size, fontWeight: 750, lineHeight: 1.3, maxWidth: CAP.maxW, textAlign: 'center', textWrap: 'balance',
+        background: 'rgba(255,255,255,.92)', color: '#111', padding: '14px 26px', borderRadius: 22, boxShadow: '0 10px 40px rgba(0,0,0,.45)'}}>
+        {body}
       </div>
     </div>
   );

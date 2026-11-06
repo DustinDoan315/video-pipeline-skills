@@ -24,7 +24,9 @@ export function computeTakes(script, voiceSec = null) {
         const from = Math.round(t.cueAt[i] * FPS);
         const end = Math.round((t.cueAt[i + 1] ?? voiceSec[t.id] ?? 0) * FPS);
         at = Math.max(end, from + 15);
-        return {from, dur: at - from, text};
+        // Word-synced captions: frame offsets (from the cue start) where each word is spoken.
+        const words = t.wordAt?.[i]?.map((w) => Math.max(0, Math.round(w * FPS) - from));
+        return {from, dur: at - from, text, words};
       }
       const dur = Math.max(15, Math.round(base[i] * scale * FPS));
       const c = {from: at, dur, text};

@@ -11,7 +11,8 @@
     "chapters": "node scripts/chapters.mjs",
     "music": "sh scripts/music-bed.sh",
     "render": "npm run collect && NODE_OPTIONS=--dns-result-order=ipv4first remotion render Video out/raw.mp4 && sh scripts/finish-audio.sh out/raw.mp4 out/video.mp4",
-    "short": "node scripts/make-short.mjs"
+    "short": "node scripts/make-short.mjs",
+    "words": "python3 scripts/align-words.py"
   },
   "dependencies": {
     "@remotion/cli": "4.0.539",

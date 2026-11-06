@@ -8,7 +8,7 @@ export const H = IS_SHORT ? 1920 : 1080;
 export const VIS = IS_SHORT ? {top: 200, bottom: 1130, left: 40, right: 40} : {top: 120, bottom: 820, left: 80, right: 80};
 export const CONTENT_W = W - VIS.left - VIS.right;
 export const CAP = IS_SHORT
-  ? {top: 1150, height: 360, size: 60, maxW: 860, left: 40, right: 160}
+  ? {top: 1230, height: 300, size: 54, maxW: 860, left: 40, right: 160}
   : {top: 850, height: 200, size: 46, maxW: 1640, left: 0, right: 0};
 export const MEME = IS_SHORT ? {left: 40, right: 40, top: 190, height: 950} : {left: 150, right: 150, top: 105, height: 715};
 /** Sticker coordinates are written for 16:9; Shorts map them into the vertical visual area. */

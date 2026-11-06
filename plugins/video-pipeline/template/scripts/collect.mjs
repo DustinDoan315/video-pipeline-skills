@@ -40,6 +40,8 @@ S.takes.forEach((t) => {
   for (const s of t.stickers ?? []) if (s.at >= n) errors.push(`${t.id}: sticker "${s.text}" at caption ${s.at}, but only ${n} captions`);
   if (t.cueAt && (t.cueAt.length !== n || t.cueAt.some((x, i) => typeof x !== "number" || (i && x <= t.cueAt[i - 1]))))
     errors.push(`${t.id}: cueAt needs ${n} increasing numbers, one per caption`);
+  if (t.wordAt && (t.wordAt.length !== n || t.wordAt.some((w, i) => w.length !== t.captions[i].split(/\s+/).length)))
+    errors.push(`${t.id}: wordAt needs one time per caption word (re-run python3 scripts/align-words.py)`);
   if (S.timing === "voice" && !existsSync(join(here, `public/vo/${t.id}.wav`))) errors.push(`${t.id}: voice mode needs public/vo/${t.id}.wav`);
 });
 if (S.channel?.logo && !existsSync(join(here, "public", S.channel.logo))) errors.push(`channel logo public/${S.channel.logo} missing`);
