@@ -16,17 +16,21 @@ Then ask Claude Code to "make a video about ..." and the `make-video` skill walk
 | Step | Skill | What it does |
 |---|---|---|
 | All | `make-video` | Runs the steps below in order |
-| 1 | `video-brief` | 4-part brief and the data file every number comes from |
-| 2 | `viewer-first-script` | Tutorial structure, jokes, meme and sticker slots, subscribe only after value |
-| 3 | `assets-and-rights` | Real data, clips and screenshots; what not to use; credit tracking |
-| 4 | `remotion-scene-kit` | Copies the template and builds one take at a time |
-| 5 | `voice-synced-remotion` | Timing from voice files, or from caption reading time |
-| 6 | `scene-qa` | Contact sheets of every caption's still before the full render |
-| 7 | `audio-bed` | Original lo-fi music bed and -16 LUFS loudness |
-| 9 | `publish-package` | Title, description, chapters from real timing, tags, pinned comment |
-| 9 | `prepublish-check` | Blocks placeholders, bad tags, broken chapters, missing credits. Also a `PreToolUse` hook on `vidiq_update_video` |
-| 10 | `shorts-from-long` | Cuts 2-3 vertical Shorts from a long video's takes, each pointing back to it |
-| 11 | `retention-review` | Steepest audience drops and the script line at each one |
+| 1 | `channel-profile` | Pulls the channel's own stats and writes `channel.md`: niche, audience, what earns views, lessons |
+| 2 | `package-first` | Fits the topic to the channel, picks the format, checks search, writes titles and thumbnails before the script |
+| 3 | `video-brief` | Brief (format, package, audience, outcome, hook, evidence, never list) and the data file every number comes from |
+| 4 | `viewer-first-script` | Opens on the result, structure per format, Shorts rules, jokes where they fit, subscribe only after value |
+| 5 | `assets-and-rights` | Screen recordings first, real data, what not to use, credit tracking |
+| 6 | `remotion-scene-kit` | Copies the template and builds one take at a time |
+| 7 | `voice-synced-remotion` | Timing from the creator's voice files, or from caption reading time for drafts |
+| 8 | `scene-qa` | Contact sheets of every caption's still before the full render |
+| 9 | `audio-bed` | Original lo-fi music bed and -16 LUFS loudness |
+| 11 | `publish-package` | Title, description, chapters from real timing, tags, pinned comment, end screen, title and thumbnail tests |
+| 11 | `prepublish-check` | Blocks placeholders, bad tags, broken chapters, missing credits. Also a `PreToolUse` hook on `vidiq_update_video` |
+| 12 | `shorts-from-long` | Cuts 3-5 stand-alone vertical Shorts from a long video, each pointing back to it |
+| 13 | `retention-review` | Day 7 and 28 review: Studio numbers, steepest drops and the line at each one, lessons into `channel.md` |
+
+Step 10 is the render. The rules behind the steps, with sources, are in [`plugins/video-pipeline/references/youtube-2026.md`](plugins/video-pipeline/references/youtube-2026.md).
 
 ## The template
 
@@ -41,7 +45,7 @@ npm run render        # out/video.mp4 at -16 LUFS
 npm run short -- ../my-short 01-hook   # vertical 1080x1920 Short from chosen takes
 ```
 
-It needs Node 22+, ffmpeg and python3. Emoji art is Twemoji (CC-BY 4.0). Credit it in your description:
+It needs Node 22+, ffmpeg and python3, plus yt-dlp for `channel-profile`. Emoji art is Twemoji (CC-BY 4.0). Credit it in your description:
 `Emoji art: Twemoji by Twitter/X, CC-BY 4.0 (https://github.com/jdecked/twemoji)`.
 
 ## Tests
@@ -49,6 +53,7 @@ It needs Node 22+, ffmpeg and python3. Emoji art is Twemoji (CC-BY 4.0). Credit 
 ```bash
 cd plugins/video-pipeline/skills/prepublish-check/scripts && node --test
 cd plugins/video-pipeline/skills/retention-review/scripts && node --test
+cd plugins/video-pipeline/skills/channel-profile/scripts && node --test
 ```
 
 `examples/old-usage-limits.json` is a real published description that fails the check.

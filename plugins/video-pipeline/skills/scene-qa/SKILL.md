@@ -11,6 +11,12 @@ Open every sheet and check each still:
 - The caption at the bottom matches the visual above it.
 - Nothing is empty that should show something (a blank frame usually means a visual index is off by one).
 - Numbers match `src/data/video.json`.
+- Screen recordings: code and UI text is readable at phone size, and no key, token, email or private repo name is visible.
+
+Then check the sheets as a whole:
+- The first still shows the hook: the result the title promised, on the same subject as the thumbnail. Not a logo, a title card or a greeting.
+- Four or more stills in a row that look the same mean the picture stands still while the words move on. Add a change: zoom into the line that matters, show the result, or cut to the next screen.
+- Shorts: nothing that matters in the right 200 px or below y 1440, where YouTube draws its buttons, title and related-video link, and nothing essential in the top 250 px. Look at the sheet at a third of its size; if a word is hard to read, make it bigger or cut it.
 
 Fix, re-run that take, and look again. A sheet you did not open does not count as checked.
 

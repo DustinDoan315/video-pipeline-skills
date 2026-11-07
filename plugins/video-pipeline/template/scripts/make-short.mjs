@@ -36,5 +36,6 @@ writeFileSync(join(out, "src/data/script.json"), JSON.stringify(short, null, 2) 
 const sec = computeTakes(short).reduce((a, t) => a + t.frames, 0) / FPS;
 console.log(`Short project: ${out}\n${takes.length} takes, ${sec.toFixed(1)} s`);
 if (sec > 180) console.warn("warning: over 3 minutes. YouTube will not treat this as a Short.");
-else if (sec > 60) console.warn("note: over 60 s. Shorts can run to 3 min, but short ones loop and hold better. Trim captions.");
-console.log("Next: cd into it, npm run qa, then npm run render. Set its Related video to the long video.");
+else if (sec > 60) console.warn("note: over 60 s. Keep it only if every beat adds something new; over 60 s any copyright claim blocks the Short. Trim captions that repeat.");
+console.log("Next: cd into it, make caption 1 the hook (7 words or fewer), npm run qa, then npm run render.");
+console.log("After upload: in YouTube Studio, set the Short's Related video to the long video.");

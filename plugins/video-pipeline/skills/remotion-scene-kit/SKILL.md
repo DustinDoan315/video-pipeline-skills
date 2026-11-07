@@ -14,6 +14,7 @@ Set `"channel": {"name", "tagline", "logo"}` in `src/data/script.json` (logo is 
 **How a take is built** (all in `src/data/script.json`)
 - `captions`: the narration on screen. Timing comes from them (see `voice-synced-remotion`).
 - `visuals`: `{ "<caption index>": spec }`. A visual stays until the next one. Kinds: `title`, `big`, `steps`, `check`, `cards`, `stat`, `bars`, `curve`, `code`, `terminal`, `cmd`, `image`, `clip`. Optional `source` adds a small source line.
+- Build around the real thing: screen recordings (`clip`) and real output (`code`, `terminal`). Use cards (`stat`, `bars`, `steps`, `check`, `big`) to land a number, a warning or a setting the screen alone wouldn't make obvious, then go back to the screen.
 - `code`/`terminal` take `file`: a file in `src/data/files/` (real command output, real code). Capture real output; never type fake output.
 - `bars`/`stat`/`curve` values use `"$path.in.video.json"`.
 - `memes` and `stickers`: see `viewer-first-script`.

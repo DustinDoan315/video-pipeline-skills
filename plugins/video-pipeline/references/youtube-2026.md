@@ -1,0 +1,50 @@
+# What the rules are based on
+
+Researched 2026-11-07. Labels: **official** (YouTube's own pages or staff), **data** (a study of many videos, correlation only), **practice** (what experienced creators agree on, no controlled data). Re-check anything older than a year before relying on it.
+
+## How YouTube picks videos
+- **Official.** Recommendations use viewing behaviour, likes, dislikes, subscriptions and satisfaction surveys. No single metric decides. ([How YouTube works](https://www.youtube.com/howyoutubeworks/product-features/recommendations/))
+- **Official.** In its first hour a new upload is shown to non-subscribers and people who never watched the channel, not only subscribers. A new channel is matched to viewers by topic; if nobody responds, it stops getting impressions. YouTube does not judge a video only on its first moments. (Todd Beaupré, Creator Insider, "YouTube Algorithm 2026", 1 Sep 2026, via [PPC Land](https://ppc.land/subscribers-skip-90-of-uploads-in-their-feed-youtube-director-says/))
+- **Official.** Search ranks on relevance (title, tags, description, video content), engagement, and the channel's expertise and trustworthiness. ([Help](https://support.google.com/youtube/answer/16090438))
+- **Official.** Growth is not tied to time between uploads, so pick a pace you can keep. Tags play a minimal role. ([Help](https://support.google.com/youtube/answer/141805), [Help](https://support.google.com/youtube/answer/146402))
+- **Official.** Titles should create curiosity for browse traffic and answer the question for search traffic. ([YouTube blog, 3 Sep 2025](https://blog.youtube/creator-and-artist-stories/master-these-4-metrics/))
+
+## Long videos
+- **Official.** Intro retention is the share still watching at 0:30. Studio compares it with your own "typical" (your recent videos of similar length). YouTube publishes no target number. ([Help](https://support.google.com/youtube/answer/9314415))
+- **Official.** Chapters need a 0:00 start, at least 3 timestamps and at least 10 s each. Chapter titles are indexed by YouTube and Google search. ([Help](https://support.google.com/youtube/answer/9884579), [YouTube blog, 8 Oct 2025](https://blog.youtube/creator-and-artist-stories/the-definitive-guide-to-creating-engaging-podcast-content/))
+- **Official.** Test & Compare tries up to 3 titles, thumbnails or pairs on long videos, from Studio on desktop. It picks the winner by watch time share, not click-through rate, over up to 2 weeks; with few impressions the result is "inconclusive". ([Help](https://support.google.com/youtube/answer/16391400))
+- **Official.** Made on YouTube, 23 Sep 2026: dynamic thumbnails, Ask Studio feedback on pacing and structure, and testing up to 3 video cuts for the best hook "coming soon". ([YouTube blog](https://blog.youtube/news-and-events/made-on-youtube-new-tools-power-creation-journey/))
+- **Official.** End screens use the last 5-20 s and hold at most 4 elements. ([Help](https://support.google.com/youtube/answer/6388789))
+- **Official.** Since 15 Jul 2025 YouTube does not monetize "image slideshows, templated storylines, or scrolling text with minimal or no narrative, commentary, or educational value", or AI content from generic templates that looks mass-produced. Content made with templates "must still demonstrate your creative vision". Videos that feel repetitive when watched in a row from one channel count too. ([Help](https://support.google.com/youtube/answer/1311392))
+- **Data.** 1of10, 300K+ videos from 2025: short titles (about 5 words) and little or no thumbnail text correlate with more views; faces made no difference below 200K subscribers; educational videos peaked at 20-22 min. vidIQ, 500 breakout thumbnails: 69% show a face, 72% use text (median five words). The two disagree on text and faces, so follow the channel's own results. ([1of10, Feb 2026](https://1of10.com/blog/what-actually-makes-a-youtube-video-go-viral-in-2025), [vidIQ, Jun 2026](https://vidiq.com/research/youtube-thumbnail-study/))
+- **Practice.** Show the working result in the first 5 s and say what the viewer will be able to do by 10 s; no logo, intro or greeting first; one subscribe ask at most, after the first payoff; end right after the payoff.
+
+## Shorts
+- **Official.** Square or vertical uploads up to 3:00 count as Shorts (since 15 Oct 2024). A Short over 1:00 with any copyright claim is blocked worldwide; YouTube Audio Library music is never claimed. ([Help](https://support.google.com/youtube/answer/15424877))
+- **Official.** Since 31 Mar 2025 every start or replay of a Short counts as a view. The old count is now "engaged views", which still decides monetization; Studio's analytics stay on engaged views. ([Help](https://support.google.com/youtube/answer/10059070), [YouTube blog, 19 Aug 2026](https://blog.youtube/inside-youtube/engaged-views-youtube-explained))
+- **Official.** "Viewed vs swiped away" is the Shorts hook metric; YouTube publishes no target. The Shorts feed may favour recent videos, one weak Short doesn't penalize the channel, and interest in a topic carries across formats. ([Help](https://support.google.com/youtube/answer/12942217), [Help](https://support.google.com/youtube/answer/16559651))
+- **Official.** Shorts and long videos are recommended separately, and YouTube has "not seen evidence of Shorts negatively impacting long-form performance". ([YouTube blog, 6 May 2025](https://blog.youtube/creator-and-artist-stories/debunking-common-myths-about-youtube-shorts))
+- **Official.** A Short can carry one clickable Related video link to the creator's own video, set in Studio on desktop. Links in Shorts descriptions and comments are not clickable. ([Help](https://support.google.com/youtube/answer/14075157))
+- **Official.** "If your Short teaches a quick hack, link it to a comprehensive, in-depth tutorial." Put a spoken and on-screen pointer in the last ~5 s, make clipped Shorts stand alone, and have the long video deliver the Short's promise in its first 5-10 s. Shorts-only viewers "may never naturally click on a 10-minute video". ([YouTube blog, 14 Jul 2026](https://blog.youtube/creator-and-artist-stories/youtube-related-videos-traffic-guide/))
+- **Official.** Custom Shorts thumbnails (YPP channels, desktop, 9:16) show on home and channel pages, not in the Shorts feed. Title tests are long-video only. (Tubefilter, 24 Jul 2026; [Search Engine Journal, 4 Dec 2025](https://www.searchenginejournal.com/youtube-title-a-b-testing-rolls-out-globally-to-creators/562571/))
+- **Official, for ads.** Google's vertical safe zone at 1080x1920 leaves out the top 288, bottom 672, left 48 and right 192 px. There is no official template for organic Shorts; measurements put the overlays at about the right 200 px and the bottom 390-480 px. The template keeps captions in x 60-880, above y 1440.
+- **Data.** quso.ai, 108K Shorts (Jun 2026): median views 901 at 11-20 s, 347 at 31-45 s, 188 at 46-60 s, 51 past 90 s. Metricool, 800K videos (2026): 2-4 Shorts a week had the best views per Short; hashtags drove under 1% of views; channels posting about 5 Shorts a month had about twice the long-video views of channels with none. Correlation only. In the AI-coding niche the top Shorts run longer (median 61 s, see below), so the skills aim for 20-60 s.
+- **Practice.** Frame 1 shows the payoff or the broken state; the hook is 7 words or fewer, said and on screen; one idea per Short; new information at every beat beats flashy cuts; the creator's own voice instead of music-only text.
+
+## The AI-coding niche (yt-dlp scan, 7 Nov 2026)
+**Data**, from search results, so biased toward winners. 59 "outliers" (last ~6 months, views at least 3x the channel's subscribers and 2x its own median) from 81 channels, plus 282 Shorts.
+- Angles: personal story or contrarian take 13 (11 from channels under 25K); "I built X" or "can AI build X" 10, with the highest median (341K); new model or feature 8, mostly big channels; workflow walkthrough 6; A vs B 5, 4 of them from channels under 25K. Plain how-tos and full courses rarely beat their channel.
+- Length: long outliers' median is 15:24, middle half 10:52-21:44; 43 of 59 run 7-25 min. No small creator's video under 7 min was among the top 150.
+- Titles, outliers vs below-median videos from the same channels: first person 32% vs 16%; curiosity words 39% vs 24%; "how to / tutorial / guide" 8% vs 20%. No difference for length (about 51 characters), numbers, brackets or tool-first. "Claude" is in 27 of 59 outlier titles.
+- Shorts: A vs B (median 28K) and numbered lists (median 29K) do best; news rarely passes 100K. Top niche Shorts have a median length of 61 s. Titles are topic-first and plain: of 60 Shorts over 100K, 45 name Claude and 26 have a number; 4 use first person.
+- Gaps: the 8 Expo / React Native + coding-agent videos found at 5-25 min all have 3K views or fewer (the big ones are courses over an hour), while 12-23 min "build an iPhone app with Claude" videos from an established channel got 26K-324K. The top 20 results for "publish expo app to app store" have a median age of a year and only 2 mention AI. Expo's own agent tooling (MCP server, skills) is barely covered, and Expo Shorts barely exist.
+
+## Not supported
+- "New uploads are tested on subscribers first": contradicted by Beaupré, Sep 2026.
+- "Test & Compare picks the highest click-through rate": it uses watch time.
+- Universal retention targets ("70% at 0:30"), "cut every 3 s", "faces add 30% CTR", "subscribe asks cost 15% of viewers": no primary data.
+- "Get on Trending": the Trending page was removed on 21 Jul 2025.
+- "Shorts max out at 60 s": 3:00 since Oct 2024. "#shorts and hashtags drive reach": not required, under 1% of views.
+- "Put the link in the Short's description or pinned comment": not clickable; use the Related video.
+- "Views show how many people watched a Short": replays count since Mar 2025, so compare Shorts with Shorts.
+- "85% watch muted", "captions add 40-80%", "loops boost ranking", "cut every 2-4 s": no YouTube data behind them.

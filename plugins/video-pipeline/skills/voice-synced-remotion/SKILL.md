@@ -5,6 +5,12 @@ description: Use when setting how long each scene of a Remotion video lasts. Let
 
 Never set scene lengths by hand. The template (`remotion-scene-kit`) does this in `src/timing-core.mjs`, shared by the render, the QA stills and the chapter list, so they always agree.
 
+**Which mode**
+- Long videos: voice mode, in the creator's own recorded voice. Captions then support the voice. A long video of captions alone reads as templated, and YouTube does not pay for scrolling-text videos with little narration.
+- Shorts: voice mode when the creator records one; text mode for a Short the user wants caption-only.
+- Text mode is also for drafts: build and check the whole video in text mode, then switch to voice once the takes are recorded.
+- Do not generate a synthetic voice in place of the creator unless they ask for one.
+
 **Text mode** (no voice), `"timing": "text"` in `script.json`
 - Each caption lasts its reading time: words / 3 + 0.8 s, never under 2.5 s.
 - Reword a caption and its take re-times.
